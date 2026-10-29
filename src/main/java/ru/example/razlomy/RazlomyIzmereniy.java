@@ -93,7 +93,7 @@ public final class RazlomyIzmereniy implements ModInitializer {
 
         double x = 0.5;
         double z = 0.5;
-        double y = Math.max(destination.getMinY() + 2.0, Math.min(destination.getSeaLevel() + 8.0, (destination.getMinY() + destination.getHeight() - 1) - 2.0));
+        double y = Math.max(destination.getMinBuildHeight() + 2.0, Math.min(destination.getSeaLevel() + 8.0, (destination.getMinBuildHeight() + destination.getMaxBuildHeight() - destination.getMinBuildHeight() - 1) - 2.0));
         player.serverLevel().sendParticles(ParticleTypes.PORTAL,
                 player.getX(), player.getY() + 1, player.getZ(), 80, 0.5, 1, 0.5, 0.15);
         player.teleportTo(destination, x, y, z, Set.<RelativeMovement>of(), player.getYRot(), player.getXRot());
