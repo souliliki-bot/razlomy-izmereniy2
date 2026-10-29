@@ -1,12 +1,9 @@
-name: Build Minecraft mod
+name: Build Razlomy Izmereniy
 
 on:
-  workflow_dispatch:
   push:
-    branches: ["main", "master"]
-
-permissions:
-  contents: read
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,19 +17,18 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-          cache: gradle
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.10.2'
+          gradle-version: '8.11.1'
 
       - name: Build mod
-        run: gradle --no-daemon clean build
+        run: gradle build --no-daemon
 
-      - name: Upload mod JAR
+      - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
-          name: razlomy-izmereniy-minecraft-1.21.1
+          name: razlomy-izmereniy-1.21.1
           path: build/libs/*.jar
           if-no-files-found: error
