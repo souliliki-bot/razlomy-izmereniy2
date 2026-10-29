@@ -33,7 +33,7 @@ public final class RazlomyIzmereniy implements ModInitializer {
                 .then(Commands.literal("power").executes(context -> {
                     ServerPlayer player = context.getSource().getPlayerOrException();
                     player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 30, 1));
-                    player.addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, 20 * 30, 1));
+                    player.addEffect(new MobEffectInstance(MobEffects.JUMP, 20 * 30, 1));
                     player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 20 * 30, 0));
                     player.serverLevel().sendParticles(ParticleTypes.PORTAL,
                             player.getX(), player.getY() + 1.0, player.getZ(),
@@ -93,7 +93,7 @@ public final class RazlomyIzmereniy implements ModInitializer {
 
         double x = 0.5;
         double z = 0.5;
-        double y = Math.max(destination.getMinY() + 2.0, Math.min(destination.getSeaLevel() + 8.0, destination.getMaxY() - 2.0));
+        double y = Math.max(destination.getMinY() + 2.0, Math.min(destination.getSeaLevel() + 8.0, (destination.getMinY() + destination.getHeight() - 1) - 2.0));
         player.serverLevel().sendParticles(ParticleTypes.PORTAL,
                 player.getX(), player.getY() + 1, player.getZ(), 80, 0.5, 1, 0.5, 0.15);
         player.teleportTo(destination, x, y, z, Set.<RelativeMovement>of(), player.getYRot(), player.getXRot());
