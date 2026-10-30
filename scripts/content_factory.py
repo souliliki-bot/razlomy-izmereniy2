@@ -241,7 +241,10 @@ def generate_mob_bundle(mob_id, class_name, speed, texture):
     client_anchor = "    public void onInitializeClient() {"
     if any(anchor not in entity_source for anchor in (entity_anchor, field_anchor, init_anchor)) or client_anchor not in client_source:
         raise ValueError("Could not find stable mob registration insertion points")
-    entity_source = entity_source.replace(entity_anchor, entity_anchor + "\n    " + entity_import, 1)
+    package_line = "package ru.example.razlomy.entity;"
+    if package_line not in entity_source:
+        raise ValueError("Could not find entity registry package declaration")
+    entity_source = entity_source.replace(package_line, package_line + "\n\n" + entity_import, 1)
     field = "\n    public static final EntityType<" + class_name + "> " + field_name + " = GeneratedMobRegistration.registerHusk(\n        MOD_ID, \"" + mob_id + "\", " + class_name + "::new, 0.7F, 1.95F, 24.0, 5.0, " + format(speed, ".2f") + "D);\n"
     entity_source = entity_source.replace(field_anchor, field + "\n" + field_anchor, 1)
     client_source = client_source.replace("public final class RazlomyClient implements ClientModInitializer {",
