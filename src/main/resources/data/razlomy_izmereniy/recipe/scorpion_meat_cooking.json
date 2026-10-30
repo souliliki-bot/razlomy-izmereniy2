@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "ingredient": "razlomy_izmereniy:scorpion_meat",
+  "result": {
+    "id": "minecraft:cooked_porkchop",
+    "count": 1
+  },
+  "experience": 0.35,
+  "cookingtime": 200
+}

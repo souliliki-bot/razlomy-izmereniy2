@@ -1,11 +1,102 @@
 {
-  "type": "minecraft:overworld",
+  "type": "razlomy_izmereniy:echo_limit",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "razlomy_izmereniy:echo_limit",
     "biome_source": {
       "type": "minecraft:multi_noise",
-      "preset": "minecraft:overworld"
+      "biomes": [
+        {
+          "biome": "razlomy_izmereniy:resonant_caves",
+          "parameters": {
+            "temperature": [
+              -0.7,
+              -0.2
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "razlomy_izmereniy:whispering_forest",
+          "parameters": {
+            "temperature": [
+              -0.19999999999999996,
+              0.3
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "razlomy_izmereniy:soundless_ravine",
+          "parameters": {
+            "temperature": [
+              0.30000000000000004,
+              0.8
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        }
+      ]
     }
   }
 }

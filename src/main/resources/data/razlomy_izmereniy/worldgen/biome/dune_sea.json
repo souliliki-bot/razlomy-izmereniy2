@@ -1,0 +1,65 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.8,
+  "downfall": 0,
+  "effects": {
+    "fog_color": 15911033,
+    "sky_color": 7902648,
+    "water_color": 4159204,
+    "water_fog_color": 329011
+  },
+  "spawners": {
+    "monster": [
+      {
+        "type": "razlomy_izmereniy:sand_hunter",
+        "weight": 90,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "razlomy_izmereniy:solar_scorpion",
+        "weight": 55,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "razlomy_izmereniy:glass_wanderer",
+        "weight": 20,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "razlomy_izmereniy:golden_sand_golem",
+        "weight": 4,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "razlomy_izmereniy:sun_eater",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      }
+    ]
+  },
+  "spawn_costs": {},
+  "carvers": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "razlomy_izmereniy:solar_ore_dunes"
+    ],
+    [],
+    [],
+    [
+      "minecraft:patch_dead_bush",
+      "minecraft:patch_cactus"
+    ],
+    []
+  ]
+}

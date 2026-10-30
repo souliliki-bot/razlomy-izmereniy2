@@ -1,15 +1,21 @@
-name: Build Razlomy Izmereniy
+name: Build Minecraft Mod
 
 on:
   push:
-    branches: [main]
+    branches:
+      - feature/rift-mechanics
+      - feature/glass-desert-mobs
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout source
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Java 21
@@ -21,14 +27,74 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.11.1'
+          gradle-version: '9.8.2'
+
+      - name: Validate datapack JSON and worldgen references
+        run: python3 scripts/validate_datapack.py
+
+      - name: Check content factory output
+        run: python3 scripts/content_factory.py --check
+      - name: Smoke-test generated Java mob scaffold
+        run: |
+          python3 -m py_compile scripts/content_factory.py
+          python3 - <<'PY'
+          import importlib.util
+          import tempfile
+          from pathlib import Path
+
+          spec = importlib.util.spec_from_file_location("content_factory", "scripts/content_factory.py")
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          with tempfile.TemporaryDirectory() as temp:
+              module.ROOT = Path(temp)
+              entity_registry = Path(temp) / "src/main/java/ru/example/razlomy/entity/GlassDesertEntityTypes.java"
+              client_registry = Path(temp) / "src/client/java/ru/example/razlomy/client/RazlomyClient.java"
+              entity_registry.parent.mkdir(parents=True, exist_ok=True)
+              client_registry.parent.mkdir(parents=True, exist_ok=True)
+              entity_registry.write_text("package ru.example.razlomy.entity;\npublic final class GlassDesertEntityTypes {\n    private static <T extends net.minecraft.world.entity.Entity> EntityType<T> register(String id, EntityType<T> type) { return type; }\n    public static void initialize() {\n    }\n}\n", encoding="utf-8")
+              client_registry.write_text("package ru.example.razlomy.client;\npublic final class RazlomyClient implements ClientModInitializer {\n    public void onInitializeClient() {\n    }\n}\n", encoding="utf-8")
+              module.generate_mob_bundle("ci_probe", "CiProbe", 1.0, "entity/ci_probe")
+              generated = Path(temp) / "src/main/java/ru/example/razlomy/entity/generated/CiProbe.java"
+              source = generated.read_text(encoding="utf-8")
+              assert "class CiProbe extends Husk" in source
+              assert "MeleeAttackGoal" in source
+              renderer = Path(temp) / "src/client/java/ru/example/razlomy/client/renderer/generated/CiProbeRenderer.java"
+              renderer_source = renderer.read_text(encoding="utf-8")
+              assert "class CiProbeRenderer extends HuskRenderer" in renderer_source
+              assert "textures/entity/entity/ci_probe.png" in renderer_source
+              entity_text = entity_registry.read_text(encoding="utf-8")
+              client_text = client_registry.read_text(encoding="utf-8")
+              assert "CiProbe::new" in entity_text
+              assert "CI_PROBE" in entity_text
+              assert "CiProbeRenderer::new" in client_text
+              assert "GlassDesertEntityTypes.CI_PROBE" in client_text
+              assert client_text.index("import ru.example.razlomy.client.renderer.generated.CiProbeRenderer;") < client_text.index("public final class RazlomyClient")
+              assert entity_text.index("import ru.example.razlomy.entity.generated.CiProbe;") < entity_text.index("public final class GlassDesertEntityTypes")
+              try:
+                  module.generate_mob_bundle("ci_probe", "CiProbe", 1.0, "entity/ci_probe")
+              except FileExistsError:
+                  pass
+              else:
+                  raise AssertionError("generator must refuse to overwrite existing mob files")
+              assert generated.read_text(encoding="utf-8") == source
+          PY
 
       - name: Build mod
-        run: gradle build --no-daemon
+        run: gradle build
 
-      - name: Upload JAR
+      - name: Upload mod JAR
         uses: actions/upload-artifact@v4
         with:
-          name: razlomy-izmereniy-1.21.1
-          path: build/libs/*.jar
+          name: Razlomy-Izmereniy-1.0.0
+          path: build/libs/razlomy-izmereniy-1.0.0.jar
           if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish JAR release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: Razlomy Izmereniy Build ${{ github.run_number }}
+          body: Automatic Minecraft mod build.
+          prerelease: true
+          files: build/libs/razlomy-izmereniy-1.0.0.jar

@@ -1,11 +1,102 @@
 {
-  "type": "minecraft:the_nether",
+  "type": "razlomy_izmereniy:mechanical_hive",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:nether",
+    "settings": "razlomy_izmereniy:mechanical_hive",
     "biome_source": {
       "type": "minecraft:multi_noise",
-      "preset": "minecraft:nether"
+      "biomes": [
+        {
+          "biome": "razlomy_izmereniy:gear_forest",
+          "parameters": {
+            "temperature": [
+              -0.7,
+              -0.2
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "razlomy_izmereniy:copper_foundry",
+          "parameters": {
+            "temperature": [
+              -0.1,
+              0.3
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "razlomy_izmereniy:circuit_wastes",
+          "parameters": {
+            "temperature": [
+              0.4,
+              0.8
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        }
+      ]
     }
   }
 }

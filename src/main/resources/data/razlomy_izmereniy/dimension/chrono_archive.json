@@ -1,10 +1,102 @@
 {
-  "type": "minecraft:the_end",
+  "type": "razlomy_izmereniy:chrono_archive",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:end",
+    "settings": "razlomy_izmereniy:chrono_archive",
     "biome_source": {
-      "type": "minecraft:the_end"
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "razlomy_izmereniy:clockwork_halls",
+          "parameters": {
+            "temperature": [
+              -0.7,
+              -0.2
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "razlomy_izmereniy:lost_minutes",
+          "parameters": {
+            "temperature": [
+              -0.19999999999999996,
+              0.3
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "razlomy_izmereniy:hourglass_desert",
+          "parameters": {
+            "temperature": [
+              0.30000000000000004,
+              0.8
+            ],
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "depth": [
+              -1,
+              1
+            ],
+            "weirdness": [
+              -1,
+              1
+            ],
+            "offset": 0
+          }
+        }
+      ]
     }
   }
 }
