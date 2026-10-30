@@ -37,6 +37,7 @@ public final class RazlomyIzmereniy implements ModInitializer {
         ru.example.razlomy.blocks.RiftBlocks.initialize();
         ru.example.razlomy.items.RiftItems.initialize();
         ru.example.razlomy.items.GlassDesertItems.initialize();
+        ru.example.razlomy.items.SolarEquipment.initialize();
         ru.example.razlomy.entity.GlassDesertEntityTypes.initialize();
         ru.example.razlomy.items.RiftCrystalAbility.initialize();
         ru.example.razlomy.items.RiftSwordAbility.initialize();
