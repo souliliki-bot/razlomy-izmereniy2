@@ -36,6 +36,7 @@ public final class RazlomyIzmereniy implements ModInitializer {
     public void onInitialize() {
         ru.example.razlomy.blocks.RiftBlocks.initialize();
         ru.example.razlomy.items.RiftItems.initialize();
+        ru.example.razlomy.items.GlassDesertItems.initialize();
         ru.example.razlomy.items.RiftCrystalAbility.initialize();
         ru.example.razlomy.items.RiftSwordAbility.initialize();
         ru.example.razlomy.events.RiftCombat.initialize();
