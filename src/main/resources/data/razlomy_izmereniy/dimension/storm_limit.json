@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:the_end",
+  "type": "razlomy_izmereniy:storm_limit",
   "generator": {
     "type": "minecraft:noise",
     "settings": "minecraft:end",
