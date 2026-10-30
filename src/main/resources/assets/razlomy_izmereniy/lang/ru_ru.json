@@ -10,5 +10,10 @@
   "item.razlomy_izmereniy.golden_core": "Золотое ядро",
   "item.razlomy_izmereniy.sun_heart": "Сердце солнца",
   "item.razlomy_izmereniy.solar_ingot": "Солнечный слиток",
-  "block.razlomy_izmereniy.solar_ore": "Солнечная руда"
+  "block.razlomy_izmereniy.solar_ore": "Солнечная руда",
+  "entity.razlomy_izmereniy.sand_hunter": "Песчаный охотник",
+  "entity.razlomy_izmereniy.solar_scorpion": "Солнечный скорпион",
+  "entity.razlomy_izmereniy.glass_wanderer": "Стеклянный странник",
+  "entity.razlomy_izmereniy.golden_sand_golem": "Золотой песчаный голем",
+  "entity.razlomy_izmereniy.sun_eater": "Пожиратель солнца"
 }
