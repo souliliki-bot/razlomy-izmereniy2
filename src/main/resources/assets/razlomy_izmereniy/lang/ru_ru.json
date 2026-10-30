@@ -73,5 +73,6 @@
   "item.razlomy_izmereniy.frost_helmet": "Шлем Ледяной Короны",
   "item.razlomy_izmereniy.frost_chestplate": "Нагрудник Ледяной Короны",
   "item.razlomy_izmereniy.frost_leggings": "Поножи Ледяной Короны",
-  "item.razlomy_izmereniy.frost_boots": "Сапоги Ледяной Короны"
+  "item.razlomy_izmereniy.frost_boots": "Сапоги Ледяной Короны",
+  "entity.razlomy_izmereniy.frost_stalker": "Морозный охотник"
 }
