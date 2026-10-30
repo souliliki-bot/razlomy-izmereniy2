@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "razlomy_izmereniy:frost_shard"
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:set_count",
+          "count": {
+            "min": 1.0,
+            "max": 2.0
+          }
+        },
+        {
+          "function": "minecraft:looting_enchant",
+          "count": {
+            "min": 0.0,
+            "max": 1.0
+          }
+        }
+      ]
+    }
+  ]
+}
