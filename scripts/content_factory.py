@@ -247,8 +247,11 @@ def generate_mob_bundle(mob_id, class_name, speed, texture):
     entity_source = entity_source.replace(package_line, package_line + "\n\n" + entity_import, 1)
     field = "\n    public static final EntityType<" + class_name + "> " + field_name + " = GeneratedMobRegistration.registerHusk(\n        MOD_ID, \"" + mob_id + "\", " + class_name + "::new, 0.7F, 1.95F, 24.0, 5.0, " + format(speed, ".2f") + "D);\n"
     entity_source = entity_source.replace(field_anchor, field + "\n" + field_anchor, 1)
-    client_source = client_source.replace("public final class RazlomyClient implements ClientModInitializer {",
-        "public final class RazlomyClient implements ClientModInitializer {\n    " + renderer_import, 1)
+    client_package_line = "package ru.example.razlomy.client;"
+    if client_package_line not in client_source:
+        raise ValueError("Could not find client registry package declaration")
+    client_source = client_source.replace(client_package_line,
+        client_package_line + "\\n\\n" + renderer_import, 1)
     client_line = "        EntityRendererRegistry.register(GlassDesertEntityTypes." + field_name + ", " + class_name + "Renderer::new);"
     client_source = client_source.replace(client_anchor, client_anchor + "\n" + client_line, 1)
     # Write registry changes only after every destination and collision has been checked.
