@@ -1,6 +1,5 @@
 package ru.example.razlomy.entity;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -32,8 +31,8 @@ public final class GlassDesertMobs {
         }
 
         @Override
-        public boolean doHurtTarget(ServerLevel level, Entity target) {
-            boolean hit = super.doHurtTarget(level, target);
+        public boolean doHurtTarget(Entity target) {
+            boolean hit = super.doHurtTarget(target);
             if (hit && target instanceof net.minecraft.world.entity.LivingEntity living) {
                 living.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0), this);
             }
@@ -59,7 +58,6 @@ public final class GlassDesertMobs {
             boolean hit = super.doHurtTarget(level, target);
             if (hit) {
                 target.push(0.0D, 0.65D, 0.0D);
-                target.hurtMarked = true;
             }
             return hit;
         }
