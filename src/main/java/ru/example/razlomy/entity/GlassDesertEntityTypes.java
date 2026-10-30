@@ -6,13 +6,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Husk;
 import ru.example.razlomy.items.RiftItems;
 
+/** Регистрация пяти существ Стеклянной пустыни с отдельными боевыми профилями. */
 public final class GlassDesertEntityTypes {
     private static final String MOD_ID = RiftItems.MOD_ID;
+
     public static final EntityType<GlassDesertMobs.SandHunter> SAND_HUNTER = register("sand_hunter",
         EntityType.Builder.of(GlassDesertMobs.SandHunter::new, MobCategory.MONSTER).sized(0.6F, 1.95F).build("sand_hunter"));
     public static final EntityType<GlassDesertMobs.SolarScorpion> SOLAR_SCORPION = register("solar_scorpion",
@@ -29,18 +30,52 @@ public final class GlassDesertEntityTypes {
     }
 
     public static void initialize() {
-        var attributes = Husk.createAttributes()
-            .add(Attributes.MAX_HEALTH, 26.0)
-            .add(Attributes.ATTACK_DAMAGE, 5.0)
-            .add(Attributes.MOVEMENT_SPEED, 0.27)
-            .build();
-        FabricDefaultAttributeRegistry.register(SAND_HUNTER, attributes);
-        FabricDefaultAttributeRegistry.register(SOLAR_SCORPION, attributes);
-        FabricDefaultAttributeRegistry.register(GLASS_WANDERER, attributes);
-        FabricDefaultAttributeRegistry.register(GOLDEN_SAND_GOLEM,
-            Husk.createAttributes().add(Attributes.MAX_HEALTH, 70.0).add(Attributes.ATTACK_DAMAGE, 12.0).add(Attributes.MOVEMENT_SPEED, 0.20).build());
-        FabricDefaultAttributeRegistry.register(SUN_EATER,
-            Husk.createAttributes().add(Attributes.MAX_HEALTH, 140.0).add(Attributes.ATTACK_DAMAGE, 18.0).add(Attributes.MOVEMENT_SPEED, 0.24).build());
+        // Охотник быстро преследует цель и наносит сильные одиночные удары.
+        FabricDefaultAttributeRegistry.register(SAND_HUNTER, Husk.createAttributes()
+            .add(Attributes.MAX_HEALTH, 30.0)
+            .add(Attributes.ATTACK_DAMAGE, 7.0)
+            .add(Attributes.MOVEMENT_SPEED, 0.32)
+            .add(Attributes.FOLLOW_RANGE, 40.0)
+            .build());
+
+        // Скорпион хрупкий, но очень быстрый и имеет повышенный отбрасывающий удар.
+        FabricDefaultAttributeRegistry.register(SOLAR_SCORPION, Husk.createAttributes()
+            .add(Attributes.MAX_HEALTH, 18.0)
+            .add(Attributes.ATTACK_DAMAGE, 4.0)
+            .add(Attributes.MOVEMENT_SPEED, 0.38)
+            .add(Attributes.ATTACK_KNOCKBACK, 1.8)
+            .add(Attributes.FOLLOW_RANGE, 28.0)
+            .build());
+
+        // Странник медленнее, зато выдерживает больше ударов и защищён стеклянным панцирем.
+        FabricDefaultAttributeRegistry.register(GLASS_WANDERER, Husk.createAttributes()
+            .add(Attributes.MAX_HEALTH, 42.0)
+            .add(Attributes.ATTACK_DAMAGE, 6.0)
+            .add(Attributes.MOVEMENT_SPEED, 0.22)
+            .add(Attributes.ARMOR, 8.0)
+            .add(Attributes.KNOCKBACK_RESISTANCE, 0.45)
+            .build());
+
+        // Голем — тяжёлый страж с высокой бронёй и устойчивостью к отбрасыванию.
+        FabricDefaultAttributeRegistry.register(GOLDEN_SAND_GOLEM, Husk.createAttributes()
+            .add(Attributes.MAX_HEALTH, 90.0)
+            .add(Attributes.ATTACK_DAMAGE, 13.0)
+            .add(Attributes.MOVEMENT_SPEED, 0.19)
+            .add(Attributes.ARMOR, 12.0)
+            .add(Attributes.KNOCKBACK_RESISTANCE, 0.8)
+            .add(Attributes.FOLLOW_RANGE, 32.0)
+            .build());
+
+        // Финальный хищник измерения: огромный запас здоровья и дальнее преследование.
+        FabricDefaultAttributeRegistry.register(SUN_EATER, Husk.createAttributes()
+            .add(Attributes.MAX_HEALTH, 160.0)
+            .add(Attributes.ATTACK_DAMAGE, 19.0)
+            .add(Attributes.MOVEMENT_SPEED, 0.25)
+            .add(Attributes.ARMOR, 10.0)
+            .add(Attributes.KNOCKBACK_RESISTANCE, 0.65)
+            .add(Attributes.FOLLOW_RANGE, 48.0)
+            .build());
     }
+
     private GlassDesertEntityTypes() {}
 }
