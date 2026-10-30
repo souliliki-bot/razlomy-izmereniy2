@@ -54,8 +54,8 @@ public final class GlassDesertMobs {
         public GoldenSandGolem(EntityType<? extends Husk> type, Level level) { super(type, level); }
 
         @Override
-        public boolean doHurtTarget(ServerLevel level, Entity target) {
-            boolean hit = super.doHurtTarget(level, target);
+        public boolean doHurtTarget(Entity target) {
+            boolean hit = super.doHurtTarget(target);
             if (hit) {
                 target.push(0.0D, 0.65D, 0.0D);
             }
