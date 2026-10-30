@@ -1,14 +1,11 @@
 {
-  "type": "minecraft:block",
-  "pools": [
-    {
-      "rolls": 1,
-      "entries": [
-        { "type": "minecraft:item", "name": "razlomy_izmereniy:frost_ore" }
-      ],
-      "conditions": [
-        { "condition": "minecraft:survives_explosion" }
-      ]
-    }
-  ]
+  "type":"minecraft:block",
+  "pools":[{
+    "rolls":1,
+    "entries":[{
+      "type":"minecraft:item","name":"razlomy_izmereniy:frost_shard",
+      "functions":[{"function":"minecraft:set_count","count":{"min":2.0,"max":4.0}}]
+    }],
+    "conditions":[{"condition":"minecraft:survives_explosion"}]
+  }]
 }
