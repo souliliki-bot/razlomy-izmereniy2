@@ -9,6 +9,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Husk;
 import ru.example.razlomy.items.RiftItems;
+import ru.example.razlomy.entity.generated.FrostStalker;
 
 /** Регистрация пяти существ Стеклянной пустыни с отдельными боевыми профилями. */
 public final class GlassDesertEntityTypes {
@@ -24,6 +25,9 @@ public final class GlassDesertEntityTypes {
         EntityType.Builder.of(GlassDesertMobs.GoldenSandGolem::new, MobCategory.MONSTER).sized(1.4F, 2.7F).build("golden_sand_golem"));
     public static final EntityType<GlassDesertMobs.SunEater> SUN_EATER = register("sun_eater",
         EntityType.Builder.of(GlassDesertMobs.SunEater::new, MobCategory.MONSTER).sized(1.8F, 3.2F).build("sun_eater"));
+
+    public static final EntityType<FrostStalker> FROST_STALKER = GeneratedMobRegistration.registerHusk(
+        MOD_ID, "frost_stalker", FrostStalker::new, 0.65F, 1.95F, 32.0, 6.0, 0.27D);
 
     private static <T extends net.minecraft.world.entity.Entity> EntityType<T> register(String id, EntityType<T> type) {
         return Registry.register(BuiltInRegistries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(MOD_ID, id), type);
