@@ -3,6 +3,7 @@ package ru.example.razlomy.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.minecraft.resources.ResourceLocation;
 import ru.example.razlomy.client.model.GlassWandererModel;
 import ru.example.razlomy.client.model.SolarScorpionModel;
 import ru.example.razlomy.client.model.GoldenSandGolemModel;
