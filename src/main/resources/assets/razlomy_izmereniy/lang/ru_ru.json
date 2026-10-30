@@ -58,5 +58,11 @@
   "item.razlomy_izmereniy.solar_boots": "Солнечные ботинки",
   "item.razlomy_izmereniy.solar_sword": "Солнечный меч",
   "item.razlomy_izmereniy.solar_pickaxe": "Солнечная кирка",
-  "item.razlomy_izmereniy.solar_axe": "Солнечный топор"
+  "item.razlomy_izmereniy.solar_axe": "Солнечный топор",
+  "item.razlomy_izmereniy.portal_gun": "Портальная пушка",
+  "item.razlomy_izmereniy.lololoshka_relic": "Компас путешественника",
+  "item.razlomy_izmereniy.scp_sus6_file": "Досье SCP-SUS6",
+  "item.razlomy_izmereniy.portal_gun.desc": "Переносит владельца к поверхности в пределах видимости.",
+  "item.razlomy_izmereniy.lololoshka_relic.desc": "Заметки о страннике, который пересекает границы миров.",
+  "item.razlomy_izmereniy.scp_sus6_file.desc": "Засекреченная запись об аномалии SUS6."
 }
