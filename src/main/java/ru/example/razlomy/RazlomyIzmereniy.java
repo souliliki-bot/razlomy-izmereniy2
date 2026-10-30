@@ -38,12 +38,14 @@ public final class RazlomyIzmereniy implements ModInitializer {
         ru.example.razlomy.items.RiftItems.initialize();
         ru.example.razlomy.items.GlassDesertItems.initialize();
         ru.example.razlomy.items.FrostItems.initialize();
+        ru.example.razlomy.items.FrostArmor.initialize();
         ru.example.razlomy.items.SolarEquipment.initialize();
         ru.example.razlomy.entity.GlassDesertEntityTypes.initialize();
         ru.example.razlomy.items.RiftCrystalAbility.initialize();
         ru.example.razlomy.items.RiftSwordAbility.initialize();
         ru.example.razlomy.events.RiftCombat.initialize();
         ru.example.razlomy.events.SolarSetBonus.initialize();
+        ru.example.razlomy.events.FrostSetBonus.initialize();
 
         CommandRegistrationCallback.EVENT.register(
             (dispatcher, registryAccess, environment) ->
