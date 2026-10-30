@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:the_end",
+  "type": "razlomy_izmereniy:lunar_necropolis",
   "generator": {
     "type": "minecraft:noise",
     "settings": "minecraft:end",
