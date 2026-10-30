@@ -12,6 +12,9 @@
   "entrypoints": {
     "main": [
       "ru.example.razlomy.RazlomyIzmereniy"
+    ],
+    "client": [
+      "ru.example.razlomy.client.RazlomyClient"
     ]
   },
   "depends": {
