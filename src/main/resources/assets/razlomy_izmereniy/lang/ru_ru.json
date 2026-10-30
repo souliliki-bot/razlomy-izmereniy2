@@ -2,5 +2,12 @@
   "block.razlomy_izmereniy.rift_debris": "Обломок Разлома",
   "block.razlomy_izmereniy.cosmic_crystal": "Космический Кристалл",
   "block.razlomy_izmereniy.void_core": "Ядро Пустоты",
-  "block.razlomy_izmereniy.star_stone": "Звёздный Камень"
+  "block.razlomy_izmereniy.star_stone": "Звёздный Камень",
+  "item.razlomy_izmereniy.hunter_meat": "Мясо песчаного охотника",
+  "item.razlomy_izmereniy.scorpion_meat": "Мясо солнечного скорпиона",
+  "item.razlomy_izmereniy.solar_stinger": "Солнечное жало",
+  "item.razlomy_izmereniy.glass_flesh": "Стеклянная плоть",
+  "item.razlomy_izmereniy.golden_core": "Золотое ядро",
+  "item.razlomy_izmereniy.sun_heart": "Сердце солнца",
+  "item.razlomy_izmereniy.solar_ingot": "Солнечный слиток"
 }
