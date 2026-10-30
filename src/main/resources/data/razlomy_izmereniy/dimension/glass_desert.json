@@ -2,7 +2,7 @@
   "type": "razlomy_izmereniy:glass_desert",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "razlomy_izmereniy:glass_desert",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
