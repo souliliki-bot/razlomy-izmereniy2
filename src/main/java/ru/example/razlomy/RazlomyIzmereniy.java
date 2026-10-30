@@ -42,6 +42,7 @@ public final class RazlomyIzmereniy implements ModInitializer {
         ru.example.razlomy.items.RiftCrystalAbility.initialize();
         ru.example.razlomy.items.RiftSwordAbility.initialize();
         ru.example.razlomy.events.RiftCombat.initialize();
+        ru.example.razlomy.events.SolarSetBonus.initialize();
 
         CommandRegistrationCallback.EVENT.register(
             (dispatcher, registryAccess, environment) ->
