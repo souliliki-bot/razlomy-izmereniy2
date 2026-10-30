@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "F F",
+    "F F"
+  ],
+  "key": {
+    "F": {
+      "item": "razlomy_izmereniy:frost_ingot"
+    }
+  },
+  "result": {
+    "id": "razlomy_izmereniy:frost_leggings"
+  }
+}
