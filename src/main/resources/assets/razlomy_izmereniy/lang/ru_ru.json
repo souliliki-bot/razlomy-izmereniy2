@@ -51,5 +51,12 @@
   "biome.razlomy_izmereniy.shattered_grove": "Расколотая роща",
   "biome.razlomy_izmereniy.molten_foundry": "Плавильня",
   "biome.razlomy_izmereniy.obsidian_crucible": "Обсидиановый горн",
-  "biome.razlomy_izmereniy.ember_fields": "Поля углей"
+  "biome.razlomy_izmereniy.ember_fields": "Поля углей",
+  "item.razlomy_izmereniy.solar_helmet": "Солнечный шлем",
+  "item.razlomy_izmereniy.solar_chestplate": "Солнечный нагрудник",
+  "item.razlomy_izmereniy.solar_leggings": "Солнечные поножи",
+  "item.razlomy_izmereniy.solar_boots": "Солнечные ботинки",
+  "item.razlomy_izmereniy.solar_sword": "Солнечный меч",
+  "item.razlomy_izmereniy.solar_pickaxe": "Солнечная кирка",
+  "item.razlomy_izmereniy.solar_axe": "Солнечный топор"
 }
