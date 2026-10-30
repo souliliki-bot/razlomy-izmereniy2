@@ -49,6 +49,21 @@ public final class RiftItems {
             )
     );
 
+    public static final Item PORTAL_GUN = register(
+        "portal_gun",
+        new PortalGunItem(new Item.Properties().stacksTo(1).durability(512))
+    );
+
+    public static final Item LOLOLOSHKA_RELIC = register(
+        "lololoshka_relic",
+        new Item.Properties().fireResistant()
+    );
+
+    public static final Item SCP_SUS6_FILE = register(
+        "scp_sus6_file",
+        new Item.Properties().stacksTo(1)
+    );
+
     private static Item register(String name, Item.Properties properties) {
         return Registry.register(
             BuiltInRegistries.ITEM,
