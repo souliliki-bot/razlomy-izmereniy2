@@ -52,12 +52,13 @@
     [],
     [],
     [
-      "razlomy_izmereniy:solar_ore"
+      "razlomy_izmereniy:solar_ore_fields"
     ],
     [],
     [],
     [
-      "minecraft:patch_dead_bush"
+      "minecraft:patch_dead_bush",
+      "minecraft:patch_tall_grass"
     ],
     []
   ]
