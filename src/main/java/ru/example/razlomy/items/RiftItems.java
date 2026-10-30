@@ -64,6 +64,14 @@ public final class RiftItems {
         new Item.Properties().stacksTo(1)
     );
 
+    private static Item register(String name, Item item) {
+        return Registry.register(
+            BuiltInRegistries.ITEM,
+            ResourceLocation.fromNamespaceAndPath(MOD_ID, name),
+            item
+        );
+    }
+
     private static Item register(String name, Item.Properties properties) {
         return Registry.register(
             BuiltInRegistries.ITEM,
