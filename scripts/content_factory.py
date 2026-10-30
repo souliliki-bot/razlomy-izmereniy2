@@ -126,6 +126,47 @@ def generate_armor_set(set_id, name, ingredient):
     print(f"Generated armor set {set_id}: helmet, chestplate, leggings, boots.")
     print("Remember: register all four Java ArmorItems and provide matching armor layer textures.")
 
+
+def generate_mob_java(mob_id, class_name, speed):
+    if not re.fullmatch(r"[a-z0-9_]+", mob_id):
+        raise ValueError("mob id must contain lowercase letters, digits and underscores")
+    if not re.fullmatch(r"[A-Z][A-Za-z0-9]*", class_name):
+        raise ValueError("class name must be PascalCase and contain only letters/digits")
+    if not (0.05 <= speed <= 2.0):
+        raise ValueError("movement speed must be between 0.05 and 2.0")
+    package_dir = ROOT / "src/main/java/ru/example/razlomy/entity/generated"
+    target = package_dir / f"{class_name}.java"
+    if target.exists():
+        raise FileExistsError(f"Refusing to overwrite {target.relative_to(ROOT)}")
+    source = f"""package ru.example.razlomy.entity.generated;
+
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.monster.Husk;
+import net.minecraft.world.level.Level;
+
+/**
+ * Generated starting point for {mob_id}.
+ * Register an EntityType for this class and add its attributes in your entity registry.
+ */
+public final class {class_name} extends Husk {{
+    public {class_name}(EntityType<? extends Husk> type, Level level) {{
+        super(type, level);
+    }}
+
+    @Override
+    protected void registerGoals() {{
+        super.registerGoals();
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, {speed:.2f}D, true));
+    }}
+}}
+"""
+    package_dir.mkdir(parents=True, exist_ok=True)
+    target.write_text(source, encoding="utf-8")
+    print(f"Generated Java mob scaffold: {target.relative_to(ROOT)}")
+    print("Next: register its EntityType and attributes, then add client renderer/model/texture.")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate generated resource JSON and biome inventory")
