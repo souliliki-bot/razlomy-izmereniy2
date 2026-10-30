@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:overworld",
+  "type": "razlomy_izmereniy:ice_crown",
   "generator": {
     "type": "minecraft:noise",
     "settings": "minecraft:overworld",
