@@ -68,6 +68,8 @@ jobs:
               assert "CI_PROBE" in entity_text
               assert "CiProbeRenderer::new" in client_text
               assert "GlassDesertEntityTypes.CI_PROBE" in client_text
+              assert client_text.index("import ru.example.razlomy.client.renderer.generated.CiProbeRenderer;") < client_text.index("public final class RazlomyClient")
+              assert entity_text.index("import ru.example.razlomy.entity.generated.CiProbe;") < entity_text.index("public final class GlassDesertEntityTypes")
               try:
                   module.generate_mob_bundle("ci_probe", "CiProbe", 1.0, "entity/ci_probe")
               except FileExistsError:
