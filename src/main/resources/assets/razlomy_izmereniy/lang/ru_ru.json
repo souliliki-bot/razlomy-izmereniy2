@@ -69,5 +69,9 @@
   "item.razlomy_izmereniy.frost_shard": "Морозный осколок",
   "item.razlomy_izmereniy.frost_ingot": "Морозный слиток",
   "item.razlomy_izmereniy.glacial_heart": "Сердце ледника",
-  "item.razlomy_izmereniy.frost_blade": "Клинок стужи"
+  "item.razlomy_izmereniy.frost_blade": "Клинок стужи",
+  "item.razlomy_izmereniy.frost_helmet": "Шлем Ледяной Короны",
+  "item.razlomy_izmereniy.frost_chestplate": "Нагрудник Ледяной Короны",
+  "item.razlomy_izmereniy.frost_leggings": "Поножи Ледяной Короны",
+  "item.razlomy_izmereniy.frost_boots": "Сапоги Ледяной Короны"
 }
