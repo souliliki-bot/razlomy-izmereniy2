@@ -47,12 +47,11 @@ jobs:
           spec.loader.exec_module(module)
           with tempfile.TemporaryDirectory() as temp:
               module.ROOT = Path(temp)
-              module.generate_mob_java("ci_probe", "CiProbe", 1.0)
+              module.generate_mob_bundle("ci_probe", "CiProbe", 1.0, "entity/ci_probe")
               generated = Path(temp) / "src/main/java/ru/example/razlomy/entity/generated/CiProbe.java"
               source = generated.read_text(encoding="utf-8")
               assert "class CiProbe extends Husk" in source
               assert "MeleeAttackGoal" in source
-              module.generate_mob_renderer("ci_probe", "CiProbe", "entity/ci_probe")
               renderer = Path(temp) / "src/client/java/ru/example/razlomy/client/renderer/generated/CiProbeRenderer.java"
               renderer_source = renderer.read_text(encoding="utf-8")
               assert "class CiProbeRenderer extends HuskRenderer" in renderer_source
