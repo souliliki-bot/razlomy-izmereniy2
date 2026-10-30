@@ -73,8 +73,8 @@ public final class GlassDesertMobs {
         }
 
         @Override
-        public boolean doHurtTarget(ServerLevel level, Entity target) {
-            boolean hit = super.doHurtTarget(level, target);
+        public boolean doHurtTarget(Entity target) {
+            boolean hit = super.doHurtTarget(target);
             if (hit) {
                 target.igniteForSeconds(4.0F);
                 if (target instanceof net.minecraft.world.entity.LivingEntity living) {
