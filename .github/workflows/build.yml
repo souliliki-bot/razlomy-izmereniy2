@@ -56,6 +56,13 @@ jobs:
               renderer_source = renderer.read_text(encoding="utf-8")
               assert "class CiProbeRenderer extends HuskRenderer" in renderer_source
               assert "textures/entity/entity/ci_probe.png" in renderer_source
+              try:
+                  module.generate_mob_bundle("ci_probe", "CiProbe", 1.0, "entity/ci_probe")
+              except FileExistsError:
+                  pass
+              else:
+                  raise AssertionError("generator must refuse to overwrite existing mob files")
+              assert generated.read_text(encoding="utf-8") == source
           PY
 
       - name: Build mod
