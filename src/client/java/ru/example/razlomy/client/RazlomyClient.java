@@ -13,10 +13,7 @@ import ru.example.razlomy.client.renderer.GoldenSandGolemRenderer;
 import ru.example.razlomy.client.renderer.SandHunterRenderer;
 import ru.example.razlomy.client.renderer.SunEaterRenderer;
 import ru.example.razlomy.client.renderer.GlassWandererRenderer;
-import net.minecraft.client.renderer.entity.HuskRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.monster.Husk;
+import ru.example.razlomy.client.renderer.FrostStalkerRenderer;
 import ru.example.razlomy.entity.GlassDesertEntityTypes;
 
 /**
@@ -36,7 +33,7 @@ public final class RazlomyClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.register(GlassDesertEntityTypes.FROST_STALKER, HuskRenderer::new);
+        EntityRendererRegistry.register(GlassDesertEntityTypes.FROST_STALKER, FrostStalkerRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(SandHunterRenderer.LAYER, SandHunterModel::createBodyLayer);
         EntityRendererRegistry.register(GlassDesertEntityTypes.SAND_HUNTER, SandHunterRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(SolarScorpionRenderer.LAYER, SolarScorpionModel::createBodyLayer);
