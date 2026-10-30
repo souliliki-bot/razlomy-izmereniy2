@@ -15,11 +15,11 @@ public final class GlassDesertItems {
 
     public static final Item HUNTER_MEAT = register("hunter_meat",
         new Item.Properties().food(new FoodProperties.Builder()
-            .nutrition(5).saturationModifier(0.6F).meat().build()));
+            .nutrition(5).saturationModifier(0.6F).build()));
 
     public static final Item SCORPION_MEAT = register("scorpion_meat",
         new Item.Properties().food(new FoodProperties.Builder()
-            .nutrition(4).saturationModifier(0.5F).meat().build()));
+            .nutrition(4).saturationModifier(0.5F).build()));
 
     public static final Item SOLAR_STINGER = register("solar_stinger",
         new Item.Properties());
