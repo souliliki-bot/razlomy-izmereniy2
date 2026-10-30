@@ -207,6 +207,27 @@ public final class {class_name}Renderer extends HuskRenderer {{
     print("This scaffold intentionally uses the vanilla Husk model; replace it for a custom silhouette.")
 
 
+
+def generate_mob_bundle(mob_id, class_name, speed, texture):
+    # Validate the full bundle before creating either file.
+    if not re.fullmatch(r"[a-z0-9_]+", mob_id):
+        raise ValueError("mob id must contain lowercase letters, digits and underscores")
+    if not re.fullmatch(r"[A-Z][A-Za-z0-9]*", class_name):
+        raise ValueError("class name must be PascalCase and contain only letters/digits")
+    if not (0.05 <= speed <= 2.0):
+        raise ValueError("movement speed must be between 0.05 and 2.0")
+    if not re.fullmatch(r"[a-z0-9_/]+", texture):
+        raise ValueError("texture must be a lowercase resource path without extension")
+    java_file = ROOT / "src/main/java/ru/example/razlomy/entity/generated" / f"{class_name}.java"
+    renderer_file = ROOT / "src/client/java/ru/example/razlomy/client/renderer/generated" / f"{class_name}Renderer.java"
+    existing = [p.relative_to(ROOT) for p in (java_file, renderer_file) if p.exists()]
+    if existing:
+        raise FileExistsError("Refusing to overwrite: " + ", ".join(map(str, existing)))
+    generate_mob_java(mob_id, class_name, speed)
+    generate_mob_renderer(mob_id, class_name, texture)
+    print("Generated complete mob scaffold (entity + client renderer).")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate generated resource JSON and biome inventory")
@@ -215,6 +236,7 @@ def main():
     parser.add_argument("--name", help="Russian display name")
     parser.add_argument("--ingredient", help="namespaced crafting ingredient")
     parser.add_argument("--texture", default="iron_ingot", help="vanilla item texture name (default: iron_ingot)")
+    parser.add_argument("--mob-bundle", metavar="ID", help="generate both Java mob and client renderer scaffolds")
     parser.add_argument("--mob-java", metavar="ID", help="generate a Java Husk-based mob class scaffold")
     parser.add_argument("--mob-renderer", metavar="ID", help="generate a vanilla-Husk-model client renderer scaffold")
     parser.add_argument("--renderer-texture", default="entity/generated_mob", help="renderer texture path without extension")
@@ -222,6 +244,11 @@ def main():
     parser.add_argument("--speed", type=float, default=1.0, help="melee movement speed for --mob-java (default: 1.0)")
     args = parser.parse_args()
     try:
+        if args.mob_bundle:
+            if not args.class_name:
+                parser.error("--mob-bundle requires --class-name")
+            generate_mob_bundle(args.mob_bundle, args.class_name, args.speed, args.renderer_texture)
+            return 0
         if args.mob_renderer:
             if not args.class_name:
                 parser.error("--mob-renderer requires --class-name")
