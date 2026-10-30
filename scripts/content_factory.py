@@ -111,7 +111,7 @@ def generate_armor_set(set_id, name, ingredient):
         model.write_text(json.dumps({
             "parent": "minecraft:item/generated",
             "textures": {"layer0": f"minecraft:item/{texture}"}
-        }, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         keys = {"M": {"item": ingredient}}
         recipe.write_text(json.dumps({
             "type": "minecraft:crafting_shaped",
@@ -119,10 +119,10 @@ def generate_armor_set(set_id, name, ingredient):
             "pattern": pattern,
             "key": keys,
             "result": {"id": f"{NS}:{item_id}", "count": 1}
-        }, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         lang[key] = f"{name} {part_name}"
     LANG.parent.mkdir(parents=True, exist_ok=True)
-    LANG.write_text(json.dumps(lang, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    LANG.write_text(json.dumps(lang, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Generated armor set {set_id}: helmet, chestplate, leggings, boots.")
     print("Remember: register all four Java ArmorItems and provide matching armor layer textures.")
 
