@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    " R ",
+    " S "
+  ],
+  "key": {
+    "R": "razlomy_izmereniy:rift_crystal",
+    "S": "minecraft:netherite_sword"
+  },
+  "result": {
+    "id": "razlomy_izmereniy:rift_sword",
+    "count": 1
+  }
+}

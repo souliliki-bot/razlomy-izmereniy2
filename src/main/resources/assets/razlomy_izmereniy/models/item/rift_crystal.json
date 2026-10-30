@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "razlomy_izmereniy:item/rift_crystal"
+  }
+}
