@@ -82,15 +82,65 @@ def generate_item(item_id, name, ingredient, texture):
     print("Remember: register the Java Item and provide a matching texture before building.")
 
 
+
+def generate_armor_set(set_id, name, ingredient):
+    if not re.fullmatch(r"[a-z0-9_]+", set_id):
+        raise ValueError("armor set id must contain lowercase letters, digits and underscores")
+    if not re.fullmatch(r"[a-z0-9_]+:[a-z0-9_]+", ingredient):
+        raise ValueError("ingredient must be a namespaced item id")
+    pieces = {
+        "helmet": ("шлем", "diamond_helmet", ["MMM", "M M"]),
+        "chestplate": ("нагрудник", "diamond_chestplate", ["M M", "MMM", "MMM"]),
+        "leggings": ("поножи", "diamond_leggings", ["MMM", "M M", "M M"]),
+        "boots": ("ботинки", "diamond_boots", ["M M", "M M"]),
+    }
+    lang = json.loads(LANG.read_text(encoding="utf-8")) if LANG.exists() else {}
+    outputs = []
+    for part, (part_name, texture, pattern) in pieces.items():
+        item_id = f"{set_id}_{part}"
+        model = RES / "assets" / NS / "models" / "item" / f"{item_id}.json"
+        recipe = RES / "data" / NS / "recipe" / f"{item_id}.json"
+        key = f"item.{NS}.{item_id}"
+        if model.exists() or recipe.exists() or key in lang:
+            raise FileExistsError(f"Refusing to overwrite existing armor piece: {item_id}")
+        outputs.append((item_id, part_name, texture, pattern, model, recipe, key))
+    # Validate all destinations first, then write the complete set.
+    for item_id, part_name, texture, pattern, model, recipe, key in outputs:
+        model.parent.mkdir(parents=True, exist_ok=True)
+        recipe.parent.mkdir(parents=True, exist_ok=True)
+        model.write_text(json.dumps({
+            "parent": "minecraft:item/generated",
+            "textures": {"layer0": f"minecraft:item/{texture}"}
+        }, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        keys = {"M": {"item": ingredient}}
+        recipe.write_text(json.dumps({
+            "type": "minecraft:crafting_shaped",
+            "category": "equipment",
+            "pattern": pattern,
+            "key": keys,
+            "result": {"id": f"{NS}:{item_id}", "count": 1}
+        }, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        lang[key] = f"{name} {part_name}"
+    LANG.parent.mkdir(parents=True, exist_ok=True)
+    LANG.write_text(json.dumps(lang, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    print(f"Generated armor set {set_id}: helmet, chestplate, leggings, boots.")
+    print("Remember: register all four Java ArmorItems and provide matching armor layer textures.")
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate generated resource JSON and biome inventory")
     parser.add_argument("--item", metavar="ID", help="generate a basic craftable item bundle")
+    parser.add_argument("--armor-set", metavar="ID", help="generate a four-piece craftable armor resource set")
     parser.add_argument("--name", help="Russian display name")
     parser.add_argument("--ingredient", help="namespaced crafting ingredient")
     parser.add_argument("--texture", default="iron_ingot", help="vanilla item texture name (default: iron_ingot)")
     args = parser.parse_args()
     try:
+        if args.armor_set:
+            if not args.name or not args.ingredient:
+                parser.error("--armor-set requires --name and --ingredient")
+            generate_armor_set(args.armor_set, args.name, args.ingredient)
+            return 0
         if args.item:
             if not args.name or not args.ingredient:
                 parser.error("--item requires --name and --ingredient")
