@@ -47,6 +47,16 @@ public class RiftBlocks {
             .lightLevel(state -> 5))
     );
 
+    public static final Block SOLAR_ORE = register(
+        "solar_ore",
+        new Block(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.COLOR_YELLOW)
+            .strength(4.0F, 5.0F)
+            .requiresCorrectToolForDrops()
+            .sound(SoundType.STONE)
+            .lightLevel(state -> 3))
+    );
+
     private static Block register(String name, Block block) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(
             "razlomy_izmereniy", name
