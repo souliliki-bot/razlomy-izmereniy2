@@ -2,7 +2,7 @@
   "type": "razlomy_izmereniy:rift_forge",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:nether",
+    "settings": "razlomy_izmereniy:rift_forge",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
