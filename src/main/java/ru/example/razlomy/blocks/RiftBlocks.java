@@ -57,6 +57,16 @@ public class RiftBlocks {
             .lightLevel(state -> 3))
     );
 
+    public static final Block FROST_ORE = register(
+        "frost_ore",
+        new Block(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.ICE)
+            .strength(3.5F, 4.5F)
+            .requiresCorrectToolForDrops()
+            .sound(SoundType.GLASS)
+            .lightLevel(state -> 2))
+    );
+
     private static Block register(String name, Block block) {
         ResourceLocation id = ResourceLocation.fromNamespaceAndPath(
             "razlomy_izmereniy", name
