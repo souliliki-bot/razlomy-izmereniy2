@@ -64,5 +64,6 @@
   "item.razlomy_izmereniy.scp_sus6_file": "Досье SCP-SUS6",
   "item.razlomy_izmereniy.portal_gun.desc": "Переносит владельца к поверхности в пределах видимости.",
   "item.razlomy_izmereniy.lololoshka_relic.desc": "Заметки о страннике, который пересекает границы миров.",
-  "item.razlomy_izmereniy.scp_sus6_file.desc": "Засекреченная запись об аномалии SUS6."
+  "item.razlomy_izmereniy.scp_sus6_file.desc": "Засекреченная запись об аномалии SUS6.",
+  "block.razlomy_izmereniy.frost_ore": "Морозная руда"
 }
