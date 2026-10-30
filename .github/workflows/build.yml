@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/rift-mechanics
+      - feature/glass-desert-mobs
   workflow_dispatch:
 
 permissions:
