@@ -2,7 +2,7 @@
   "type": "razlomy_izmereniy:lunar_necropolis",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:end",
+    "settings": "razlomy_izmereniy:lunar_necropolis",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
