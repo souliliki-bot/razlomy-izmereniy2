@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "razlomy_izmereniy:item/rift_sword"
+  }
+}
