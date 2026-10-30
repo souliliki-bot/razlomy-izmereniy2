@@ -223,9 +223,37 @@ def generate_mob_bundle(mob_id, class_name, speed, texture):
     existing = [p.relative_to(ROOT) for p in (java_file, renderer_file) if p.exists()]
     if existing:
         raise FileExistsError("Refusing to overwrite: " + ", ".join(map(str, existing)))
+    # Prepare automatic registrations before creating the generated source files.
+    entity_registry = ROOT / "src/main/java/ru/example/razlomy/entity/GlassDesertEntityTypes.java"
+    client_registry = ROOT / "src/client/java/ru/example/razlomy/client/RazlomyClient.java"
+    if not entity_registry.exists() or not client_registry.exists():
+        raise FileNotFoundError("Expected entity and client registries for automatic mob registration")
+    entity_source = entity_registry.read_text(encoding="utf-8")
+    client_source = client_registry.read_text(encoding="utf-8")
+    field_name = re.sub(r"[^A-Z0-9]+", "_", mob_id.upper()).strip("_")
+    entity_import = "import ru.example.razlomy.entity.generated." + class_name + ";"
+    renderer_import = "import ru.example.razlomy.client.renderer.generated." + class_name + "Renderer;"
+    if entity_import in entity_source or (" " + field_name + " =") in entity_source or ('"' + mob_id + '"') in entity_source or renderer_import in client_source:
+        raise FileExistsError("Mob registration already exists for " + mob_id + " or " + class_name)
+    entity_anchor = "public final class GlassDesertEntityTypes {"
+    field_anchor = "    private static <T extends net.minecraft.world.entity.Entity> EntityType<T> register"
+    init_anchor = "    public static void initialize() {"
+    client_anchor = "    public void onInitializeClient() {"
+    if any(anchor not in entity_source for anchor in (entity_anchor, field_anchor, init_anchor)) or client_anchor not in client_source:
+        raise ValueError("Could not find stable mob registration insertion points")
+    entity_source = entity_source.replace(entity_anchor, entity_anchor + "\n    " + entity_import, 1)
+    field = "\n    public static final EntityType<" + class_name + "> " + field_name + " = GeneratedMobRegistration.registerHusk(\n        MOD_ID, \"" + mob_id + "\", " + class_name + "::new, 0.7F, 1.95F, 24.0, 5.0, " + format(speed, ".2f") + "D);\n"
+    entity_source = entity_source.replace(field_anchor, field + "\n" + field_anchor, 1)
+    client_source = client_source.replace("public final class RazlomyClient implements ClientModInitializer {",
+        "public final class RazlomyClient implements ClientModInitializer {\n    " + renderer_import, 1)
+    client_line = "        EntityRendererRegistry.register(GlassDesertEntityTypes." + field_name + ", " + class_name + "Renderer::new);"
+    client_source = client_source.replace(client_anchor, client_anchor + "\n" + client_line, 1)
+    # Write registry changes only after every destination and collision has been checked.
+    entity_registry.write_text(entity_source, encoding="utf-8")
+    client_registry.write_text(client_source, encoding="utf-8")
     generate_mob_java(mob_id, class_name, speed)
     generate_mob_renderer(mob_id, class_name, texture)
-    print("Generated complete mob scaffold (entity + client renderer).")
+    print("Generated and registered complete mob bundle (entity + renderer + client registration).")
 
 
 def main():
