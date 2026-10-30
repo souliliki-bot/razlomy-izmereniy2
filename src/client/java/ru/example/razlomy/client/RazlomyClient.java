@@ -36,6 +36,7 @@ public final class RazlomyClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        EntityRendererRegistry.register(GlassDesertEntityTypes.FROST_STALKER, HuskRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(SandHunterRenderer.LAYER, SandHunterModel::createBodyLayer);
         EntityRendererRegistry.register(GlassDesertEntityTypes.SAND_HUNTER, SandHunterRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(SolarScorpionRenderer.LAYER, SolarScorpionModel::createBodyLayer);
