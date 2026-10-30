@@ -15,15 +15,15 @@ import ru.example.razlomy.entity.GlassDesertEntityTypes;
  */
 public final class RazlomyClient implements ClientModInitializer {
     private static final ResourceLocation HUNTER_TEXTURE =
-        ResourceLocation.withDefaultNamespace("textures/entity/husk/husk.png");
+        ResourceLocation.fromNamespaceAndPath("razlomy_izmereniy", "textures/entity/glass_desert/sand_hunter.png");
     private static final ResourceLocation SCORPION_TEXTURE =
-        ResourceLocation.withDefaultNamespace("textures/entity/silverfish.png");
+        ResourceLocation.fromNamespaceAndPath("razlomy_izmereniy", "textures/entity/glass_desert/solar_scorpion.png");
     private static final ResourceLocation WANDERER_TEXTURE =
-        ResourceLocation.withDefaultNamespace("textures/entity/zombie/drowned.png");
+        ResourceLocation.fromNamespaceAndPath("razlomy_izmereniy", "textures/entity/glass_desert/glass_wanderer.png");
     private static final ResourceLocation GOLEM_TEXTURE =
-        ResourceLocation.withDefaultNamespace("textures/entity/iron_golem/iron_golem.png");
+        ResourceLocation.fromNamespaceAndPath("razlomy_izmereniy", "textures/entity/glass_desert/golden_sand_golem.png");
     private static final ResourceLocation SUN_EATER_TEXTURE =
-        ResourceLocation.withDefaultNamespace("textures/entity/skeleton/wither_skeleton.png");
+        ResourceLocation.fromNamespaceAndPath("razlomy_izmereniy", "textures/entity/glass_desert/sun_eater.png");
 
     @Override
     public void onInitializeClient() {
