@@ -47,6 +47,12 @@ jobs:
           spec.loader.exec_module(module)
           with tempfile.TemporaryDirectory() as temp:
               module.ROOT = Path(temp)
+              entity_registry = Path(temp) / "src/main/java/ru/example/razlomy/entity/GlassDesertEntityTypes.java"
+              client_registry = Path(temp) / "src/client/java/ru/example/razlomy/client/RazlomyClient.java"
+              entity_registry.parent.mkdir(parents=True, exist_ok=True)
+              client_registry.parent.mkdir(parents=True, exist_ok=True)
+              entity_registry.write_text("package ru.example.razlomy.entity;\npublic final class GlassDesertEntityTypes {\n    private static <T extends net.minecraft.world.entity.Entity> EntityType<T> register(String id, EntityType<T> type) { return type; }\n    public static void initialize() {\n    }\n}\n", encoding="utf-8")
+              client_registry.write_text("package ru.example.razlomy.client;\npublic final class RazlomyClient implements ClientModInitializer {\n    public void onInitializeClient() {\n    }\n}\n", encoding="utf-8")
               module.generate_mob_bundle("ci_probe", "CiProbe", 1.0, "entity/ci_probe")
               generated = Path(temp) / "src/main/java/ru/example/razlomy/entity/generated/CiProbe.java"
               source = generated.read_text(encoding="utf-8")
@@ -56,6 +62,12 @@ jobs:
               renderer_source = renderer.read_text(encoding="utf-8")
               assert "class CiProbeRenderer extends HuskRenderer" in renderer_source
               assert "textures/entity/entity/ci_probe.png" in renderer_source
+              entity_text = entity_registry.read_text(encoding="utf-8")
+              client_text = client_registry.read_text(encoding="utf-8")
+              assert "CiProbe::new" in entity_text
+              assert "CI_PROBE" in entity_text
+              assert "CiProbeRenderer::new" in client_text
+              assert "GlassDesertEntityTypes.CI_PROBE" in client_text
               try:
                   module.generate_mob_bundle("ci_probe", "CiProbe", 1.0, "entity/ci_probe")
               except FileExistsError:
