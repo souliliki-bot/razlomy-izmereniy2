@@ -2,7 +2,7 @@
   "type": "razlomy_izmereniy:zero_sun_garden",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "razlomy_izmereniy:zero_sun_garden",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
