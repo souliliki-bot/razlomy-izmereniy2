@@ -2,7 +2,7 @@
   "type": "razlomy_izmereniy:chrono_archive",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:end",
+    "settings": "razlomy_izmereniy:chrono_archive",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
