@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:overworld",
+  "type": "razlomy_izmereniy:silent_ocean",
   "generator": {
     "type": "minecraft:noise",
     "settings": "minecraft:overworld",
