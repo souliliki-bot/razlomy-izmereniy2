@@ -4,6 +4,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import ru.example.razlomy.client.model.GlassWandererModel;
+import ru.example.razlomy.client.model.SolarScorpionModel;
+import ru.example.razlomy.client.renderer.SolarScorpionRenderer;
 import ru.example.razlomy.client.renderer.GlassWandererRenderer;
 import net.minecraft.client.renderer.entity.HuskRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -29,6 +31,7 @@ public final class RazlomyClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(GlassDesertEntityTypes.SAND_HUNTER, SandHunterRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(SolarScorpionRenderer.LAYER, SolarScorpionModel::createBodyLayer);
         EntityRendererRegistry.register(GlassDesertEntityTypes.SOLAR_SCORPION, SolarScorpionRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(GlassWandererRenderer.LAYER, GlassWandererModel::createBodyLayer);
         EntityRendererRegistry.register(GlassDesertEntityTypes.GLASS_WANDERER, GlassWandererRenderer::new);
@@ -41,10 +44,7 @@ public final class RazlomyClient implements ClientModInitializer {
         @Override public ResourceLocation getTextureLocation(Husk entity) { return HUNTER_TEXTURE; }
     }
 
-    private static final class SolarScorpionRenderer extends HuskRenderer {
-        SolarScorpionRenderer(EntityRendererProvider.Context context) { super(context); }
-        @Override public ResourceLocation getTextureLocation(Husk entity) { return SCORPION_TEXTURE; }
-    }
+
 
 
 
