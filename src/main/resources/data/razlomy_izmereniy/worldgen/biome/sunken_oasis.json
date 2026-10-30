@@ -8,7 +8,40 @@
     "water_color": 4159204,
     "water_fog_color": 329011
   },
-  "spawners": {},
+  "spawners": {
+    "monster": [
+      [
+        "sand_hunter",
+        25,
+        1,
+        2
+      ],
+      [
+        "solar_scorpion",
+        15,
+        1,
+        1
+      ],
+      [
+        "glass_wanderer",
+        75,
+        1,
+        2
+      ],
+      [
+        "golden_sand_golem",
+        8,
+        1,
+        1
+      ],
+      [
+        "sun_eater",
+        1,
+        1,
+        1
+      ]
+    ]
+  },
   "spawn_costs": {},
   "carvers": [],
   "features": [
@@ -18,10 +51,15 @@
     [],
     [],
     [],
+    [
+      "razlomy_izmereniy:solar_ore"
+    ],
     [],
     [],
-    [],
-    [],
+    [
+      "minecraft:patch_sugar_cane",
+      "minecraft:patch_dead_bush"
+    ],
     []
   ]
 }
