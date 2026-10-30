@@ -10,36 +10,36 @@
   },
   "spawners": {
     "monster": [
-      [
-        "sand_hunter",
-        55,
-        1,
-        3
-      ],
-      [
-        "solar_scorpion",
-        35,
-        1,
-        2
-      ],
-      [
-        "glass_wanderer",
-        65,
-        1,
-        2
-      ],
-      [
-        "golden_sand_golem",
-        2,
-        1,
-        1
-      ],
-      [
-        "sun_eater",
-        1,
-        1,
-        1
-      ]
+      {
+        "type": "razlomy_izmereniy:sand_hunter",
+        "weight": 55,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "razlomy_izmereniy:solar_scorpion",
+        "weight": 35,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "razlomy_izmereniy:glass_wanderer",
+        "weight": 65,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "razlomy_izmereniy:golden_sand_golem",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "razlomy_izmereniy:sun_eater",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      }
     ]
   },
   "spawn_costs": {},
