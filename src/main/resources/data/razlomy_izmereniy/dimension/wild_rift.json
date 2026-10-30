@@ -2,7 +2,7 @@
   "type": "razlomy_izmereniy:wild_rift",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "razlomy_izmereniy:wild_rift",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
