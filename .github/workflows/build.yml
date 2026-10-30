@@ -29,6 +29,9 @@ jobs:
         with:
           gradle-version: '9.8.2'
 
+      - name: Validate datapack JSON and worldgen references
+        run: python3 scripts/validate_datapack.py
+
       - name: Build mod
         run: gradle build
 
