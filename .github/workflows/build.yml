@@ -34,6 +34,25 @@ jobs:
 
       - name: Check content factory output
         run: python3 scripts/content_factory.py --check
+      - name: Smoke-test generated Java mob scaffold
+        run: |
+          python3 -m py_compile scripts/content_factory.py
+          python3 - <<'PY'
+          import importlib.util
+          import tempfile
+          from pathlib import Path
+
+          spec = importlib.util.spec_from_file_location("content_factory", "scripts/content_factory.py")
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          with tempfile.TemporaryDirectory() as temp:
+              module.ROOT = Path(temp)
+              module.generate_mob_java("ci_probe", "CiProbe", 1.0)
+              generated = Path(temp) / "src/main/java/ru/example/razlomy/entity/generated/CiProbe.java"
+              source = generated.read_text(encoding="utf-8")
+              assert "class CiProbe extends Husk" in source
+              assert "MeleeAttackGoal" in source
+          PY
 
       - name: Build mod
         run: gradle build
