@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["IEI", "RCR", "IRI"],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "E": { "item": "minecraft:ender_pearl" },
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "razlomy_izmereniy:rift_crystal" }
+  },
+  "result": { "id": "razlomy_izmereniy:portal_gun", "count": 1 }
+}
