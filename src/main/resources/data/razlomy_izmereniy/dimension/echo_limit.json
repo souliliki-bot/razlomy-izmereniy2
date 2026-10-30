@@ -2,7 +2,7 @@
   "type": "razlomy_izmereniy:echo_limit",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "razlomy_izmereniy:echo_limit",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
