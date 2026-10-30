@@ -217,7 +217,7 @@ def main():
     parser.add_argument("--texture", default="iron_ingot", help="vanilla item texture name (default: iron_ingot)")
     parser.add_argument("--mob-java", metavar="ID", help="generate a Java Husk-based mob class scaffold")
     parser.add_argument("--mob-renderer", metavar="ID", help="generate a vanilla-Husk-model client renderer scaffold")
-    parser.add_argument("--texture", default="entity/generated_mob", help="renderer texture path without extension")
+    parser.add_argument("--renderer-texture", default="entity/generated_mob", help="renderer texture path without extension")
     parser.add_argument("--class-name", help="PascalCase Java class name for --mob-java")
     parser.add_argument("--speed", type=float, default=1.0, help="melee movement speed for --mob-java (default: 1.0)")
     args = parser.parse_args()
@@ -225,7 +225,7 @@ def main():
         if args.mob_renderer:
             if not args.class_name:
                 parser.error("--mob-renderer requires --class-name")
-            generate_mob_renderer(args.mob_renderer, args.class_name, args.texture)
+            generate_mob_renderer(args.mob_renderer, args.class_name, args.renderer_texture)
             return 0
         if args.mob_java:
             if not args.class_name:
