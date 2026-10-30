@@ -1,5 +1,6 @@
 package ru.example.razlomy.items;
 
+
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -17,6 +18,7 @@ import ru.example.razlomy.data.RiftReturnPoints;
 import java.util.Set;
 
 public final class RiftCrystalAbility {
+
     private static final ResourceKey<Level> RIFT_FORGE =
         ResourceKey.create(
             net.minecraft.core.registries.Registries.DIMENSION,
@@ -47,10 +49,10 @@ public final class RiftCrystalAbility {
                 serverPlayer.serverLevel().dimension().equals(RIFT_FORGE);
 
             ServerLevel destination;
-
             double x;
             double y;
             double z;
+
             float yaw = serverPlayer.getYRot();
             float pitch = serverPlayer.getXRot();
 
@@ -67,6 +69,7 @@ public final class RiftCrystalAbility {
                     }
 
                     BlockPos spawn = destination.getSharedSpawnPos();
+
                     x = spawn.getX() + 0.5;
                     y = spawn.getY() + 1.0;
                     z = spawn.getZ() + 0.5;
@@ -90,7 +93,8 @@ public final class RiftCrystalAbility {
                     pitch = point.pitch();
                 }
             } else {
-                destination = serverPlayer.getServer().getLevel(RIFT_FORGE);
+                destination = serverPlayer.getServer()
+                    .getLevel(RIFT_FORGE);
 
                 if (destination == null) {
                     serverPlayer.sendSystemMessage(
@@ -101,9 +105,13 @@ public final class RiftCrystalAbility {
                     return InteractionResultHolder.fail(stack);
                 }
 
-                RiftReturnPoints.save(serverPlayer);
+                // Не перезаписываем уже сохранённую точку.
+                if (RiftReturnPoints.get(serverPlayer) == null) {
+                    RiftReturnPoints.save(serverPlayer);
+                }
 
                 BlockPos spawn = destination.getSharedSpawnPos();
+
                 x = spawn.getX() + 0.5;
                 y = spawn.getY() + 1.0;
                 z = spawn.getZ() + 0.5;
@@ -117,10 +125,6 @@ public final class RiftCrystalAbility {
                 100, 0.7, 1.0, 0.7, 0.15
             );
 
-            serverPlayer.getCooldowns().addCooldown(
-                RiftItems.RIFT_CRYSTAL, 100
-            );
-
             serverPlayer.teleportTo(
                 destination,
                 x, y, z,
@@ -129,10 +133,25 @@ public final class RiftCrystalAbility {
                 pitch
             );
 
+            // Удаляем точку только после возвращения.
+            if (returning) {
+                RiftReturnPoints.clear(serverPlayer);
+            }
+
+            destination.sendParticles(
+                ParticleTypes.REVERSE_PORTAL,
+                x, y + 1.0, z,
+                100, 0.7, 1.0, 0.7, 0.15
+            );
+
+            serverPlayer.getCooldowns().addCooldown(
+                RiftItems.RIFT_CRYSTAL, 100
+            );
+
             serverPlayer.sendSystemMessage(
                 Component.literal(
                     returning
-                        ? "§d✦ Ты вернулся в точку входа!"
+                        ? "§d✦ Ты вернулся в исходную точку!"
                         : "§5🌀 Добро пожаловать в Кузницу Разломов!"
                 )
             );

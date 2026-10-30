@@ -17,6 +17,8 @@ import net.minecraft.world.entity.RelativeMovement;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import ru.example.razlomy.data.RiftReturnPoints;
+
 import java.util.Set;
 
 public final class RazlomyIzmereniy implements ModInitializer {
@@ -33,7 +35,6 @@ public final class RazlomyIzmereniy implements ModInitializer {
     @Override
     public void onInitialize() {
         ru.example.razlomy.blocks.RiftBlocks.initialize();
-
         ru.example.razlomy.items.RiftItems.initialize();
         ru.example.razlomy.items.RiftCrystalAbility.initialize();
         ru.example.razlomy.items.RiftSwordAbility.initialize();
@@ -49,11 +50,14 @@ public final class RazlomyIzmereniy implements ModInitializer {
                                 context.getSource().getPlayerOrException();
 
                             player.addEffect(new MobEffectInstance(
-                                MobEffects.MOVEMENT_SPEED, 600, 1));
+                                MobEffects.MOVEMENT_SPEED, 600, 1
+                            ));
                             player.addEffect(new MobEffectInstance(
-                                MobEffects.JUMP, 600, 1));
+                                MobEffects.JUMP, 600, 1
+                            ));
                             player.addEffect(new MobEffectInstance(
-                                MobEffects.NIGHT_VISION, 600, 0));
+                                MobEffects.NIGHT_VISION, 600, 0
+                            ));
 
                             player.serverLevel().sendParticles(
                                 ParticleTypes.PORTAL,
@@ -96,51 +100,80 @@ public final class RazlomyIzmereniy implements ModInitializer {
 
                         .then(Commands.literal("enter")
                             .then(Commands.literal("echo")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "echo_limit", "Предел Эха")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "echo_limit", "Предел Эха"
+                                )))
                             .then(Commands.literal("forge")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "rift_forge", "Кузница Разлома")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "rift_forge", "Кузница Разлома"
+                                )))
                             .then(Commands.literal("garden")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "zero_sun_garden", "Сад Нулевого Солнца")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "zero_sun_garden", "Сад Нулевого Солнца"
+                                )))
                             .then(Commands.literal("desert")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "glass_desert", "Стеклянная Пустыня")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "glass_desert", "Стеклянная Пустыня"
+                                )))
                             .then(Commands.literal("ocean")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "silent_ocean", "Безмолвный Океан")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "silent_ocean", "Безмолвный Океан"
+                                )))
                             .then(Commands.literal("storm")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "storm_limit", "Грозовой Предел")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "storm_limit", "Грозовой Предел"
+                                )))
                             .then(Commands.literal("frost")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "ice_crown", "Ледяная Корона")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "ice_crown", "Ледяная Корона"
+                                )))
                             .then(Commands.literal("hive")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "mechanical_hive", "Механический Улей")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "mechanical_hive", "Механический Улей"
+                                )))
                             .then(Commands.literal("mire")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "crimson_mire", "Багровая Трясина")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "crimson_mire", "Багровая Трясина"
+                                )))
                             .then(Commands.literal("necropolis")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "lunar_necropolis", "Лунный Некрополь")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "lunar_necropolis", "Лунная Некрополь"
+                                )))
                             .then(Commands.literal("wild")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "wild_rift", "Дикий Разлом")))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "wild_rift", "Дикий Разлом"
+                                )))
                             .then(Commands.literal("chrono")
-                                .executes(c -> travel(c.getSource().getPlayerOrException(),
-                                    "chrono_archive", "Хроно-Архив"))))
+                                .executes(c -> travel(
+                                    c.getSource().getPlayerOrException(),
+                                    "chrono_archive", "Хроно-Архив"
+                                )))
+                        )
 
                         .then(Commands.literal("return").executes(context ->
-                            travel(context.getSource().getPlayerOrException(),
-                                "minecraft:overworld", "Обычный мир")))
+                            returnToOrigin(
+                                context.getSource().getPlayerOrException()
+                            )
+                        ))
 
                         .then(Commands.literal("help").executes(context -> {
                             context.getSource().sendSuccess(
                                 () -> Component.literal(
-                                    "§5Разломы измерений§7: /razlom portal, /razlom power, /razlom return"
-                                ), false
+                                    "§5Разломы измерений§7: /razlom portal, "
+                                    + "/razlom power, /razlom return"
+                                ),
+                                false
                             );
                             return Command.SINGLE_SUCCESS;
                         }))
@@ -149,7 +182,6 @@ public final class RazlomyIzmereniy implements ModInitializer {
     }
 
     private static void openPortalMenu(ServerPlayer player) {
-
         player.sendSystemMessage(Component.literal(""));
         player.sendSystemMessage(Component.literal(
             "§5§l✦ МЕНЮ РАЗЛОМОВ ✦"
@@ -199,26 +231,32 @@ public final class RazlomyIzmereniy implements ModInitializer {
         String id,
         String label
     ) {
-        ResourceKey<Level> key = id.contains(":")
-            ? ResourceKey.create(
-                net.minecraft.core.registries.Registries.DIMENSION,
-                ResourceLocation.parse(id)
-            )
-            : dimension(id);
-
+        ResourceKey<Level> key = dimension(id);
         ServerLevel destination = player.getServer().getLevel(key);
 
         if (destination == null) {
             player.sendSystemMessage(Component.literal(
-                "§cИзмерение «" + label +
-                "» не загружено. Проверь JSON измерения."
+                "§cИзмерение «" + label
+                + "» не загружено. Проверь JSON измерения."
             ));
             return 0;
         }
 
+        if (player.serverLevel().dimension().equals(key)) {
+            player.sendSystemMessage(Component.literal(
+                "§eТы уже находишься в этом измерении."
+            ));
+            return 0;
+        }
+
+        // Сохраняем только первую точку входа.
+        // Последующие переходы между измерениями её не перезаписывают.
+        if (RiftReturnPoints.get(player) == null) {
+            RiftReturnPoints.save(player);
+        }
+
         double x = 0.5;
         double z = 0.5;
-
         double y = Math.max(
             destination.getMinBuildHeight() + 2.0,
             Math.min(
@@ -250,6 +288,59 @@ public final class RazlomyIzmereniy implements ModInitializer {
 
         player.sendSystemMessage(Component.literal(
             "§5🌀 Ты вошёл в измерение: §d" + label + "§5!"
+        ));
+
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int returnToOrigin(ServerPlayer player) {
+        RiftReturnPoints.ReturnPoint point =
+            RiftReturnPoints.get(player);
+
+        if (point == null) {
+            player.sendSystemMessage(Component.literal(
+                "§cУ тебя нет сохранённой точки возврата."
+            ));
+            return 0;
+        }
+
+        ServerLevel destination =
+            player.getServer().getLevel(point.dimension());
+
+        if (destination == null) {
+            player.sendSystemMessage(Component.literal(
+                "§cИсходное измерение недоступно!"
+            ));
+            return 0;
+        }
+
+        player.serverLevel().sendParticles(
+            ParticleTypes.PORTAL,
+            player.getX(), player.getY() + 1,
+            player.getZ(), 100,
+            0.5, 1.0, 0.5, 0.15
+        );
+
+        player.teleportTo(
+            destination,
+            point.x(),
+            point.y(),
+            point.z(),
+            Set.<RelativeMovement>of(),
+            point.yaw(),
+            point.pitch()
+        );
+
+        RiftReturnPoints.clear(player);
+
+        destination.sendParticles(
+            ParticleTypes.REVERSE_PORTAL,
+            point.x(), point.y() + 1, point.z(),
+            100, 0.8, 1.0, 0.8, 0.15
+        );
+
+        player.sendSystemMessage(Component.literal(
+            "§d✦ Ты вернулся в исходную точку!"
         ));
 
         return Command.SINGLE_SUCCESS;
