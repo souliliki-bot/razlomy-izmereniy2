@@ -164,7 +164,8 @@ public final class {class_name} extends Husk {{
     package_dir.mkdir(parents=True, exist_ok=True)
     target.write_text(source, encoding="utf-8")
     print(f"Generated Java mob scaffold: {target.relative_to(ROOT)}")
-    print(f"Register with GeneratedMobRegistration.registerHusk(\"razlomy_izmereniy\", \"{mob_id}\", {class_name}::new, 0.7F, 1.95F, 24.0, 5.0, {speed:.2f}D).")\n    print("Then add the returned EntityType to your initializer and create a client renderer/model/texture.")
+    print(f"Register with GeneratedMobRegistration.registerHusk(\\\"razlomy_izmereniy\\\", \\\"{mob_id}\\\", {class_name}::new, 0.7F, 1.95F, 24.0, 5.0, {speed:.2f}D).")
+    print("Then add the returned EntityType to your initializer and create a client renderer/model/texture.")
 
 
 def main():
