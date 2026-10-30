@@ -18,7 +18,7 @@ public final class FrostSetBonus {
                 if (isWearingFullSet(player)) {
                     if (player.tickCount % 40 == 0) {
                         player.addEffect(new MobEffectInstance(
-                            MobEffects.RESISTANCE, 80, 0, true, false, true
+                            MobEffects.DAMAGE_RESISTANCE, 80, 0, true, false, true
                         ));
                     }
                     if (player.tickCount % 20 == 0) {
